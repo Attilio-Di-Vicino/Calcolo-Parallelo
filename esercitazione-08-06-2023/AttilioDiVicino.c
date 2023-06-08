@@ -25,7 +25,7 @@
 #define MAXVALUE 9
 #define N_BLOC M // le righe di Bloc saranno le colonne di A
 #define M_BLOC N // le colonne di Bloc saranno le righe di A
-#define NUMTHREADS 4 // Numero dei thread utilizzati
+#define NUMTHREADS NP // Numero dei thread utilizzati
 #define OFFSET(b) b * ( N_BLOC / NUMTHREADS ) // Offset per accedere ai singoli Bloc
 #define N_C ( M / NUMTHREADS ) + ( M % NUMTHREADS ) // Numero di righe della matrice C
 #define M_C N // Numero di colonne della matrice C
@@ -53,7 +53,7 @@ void initMatrix( int*** matrix, int N, int M ) {
 
 int main() {
 
-	int N, M;
+	int N, M, NP;
 	int** matrix;
 
     /**
@@ -74,6 +74,9 @@ int main() {
     int i, j, b;
 	
 	srand( time( NULL ) );
+
+    printf( "\nInserisci il numero di thread: " );
+	scanf( "%d", &NP );
 	
 	printf( "\nInserisci il numero di righe: " );
 	scanf( "%d", &N );
