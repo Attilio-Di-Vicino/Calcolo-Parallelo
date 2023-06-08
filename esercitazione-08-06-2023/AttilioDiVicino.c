@@ -27,7 +27,7 @@
 #define M_BLOC N // le colonne di Bloc saranno le righe di A
 #define NUMTHREADS 4 // Numero dei thread utilizzati
 #define OFFSET(b) b * ( N_BLOC / NUMTHREADS ) // Offset per accedere ai singoli Bloc
-#define N_C M / NUMTHREADS // Numero di righe della matrice C
+#define N_C ( M / NUMTHREADS ) + ( M % NUMTHREADS ) // Numero di righe della matrice C
 #define M_C N // Numero di colonne della matrice C
 
 void printMatrix( int** matrix, int N, int M, char name[] ) {
@@ -80,6 +80,8 @@ int main() {
 	
 	printf( "\nInserisci il numero di righe: " );
 	scanf( "%d", &M );
+
+    int off = M % NUMTHREADS;
 	
 	printf( "\nMatrix -> N: %d, M: %d", N, M );
     printf( "\nBloc -> N: %d, M: %d", N_BLOC, M_BLOC );
@@ -120,7 +122,12 @@ int main() {
     {
         for ( b = 0; b < NUMTHREADS; b++ ) {
             printf( "\nBloc #%d\n", b );
-            for ( i = 0; i < N_BLOC / NUMTHREADS; i++ ) {
+            int S;
+            if ( b == 0 )
+                S = ( N_BLOC / NUMTHREADS ) + ( N_BLOC % NUMTHREADS );
+            else
+                S = N_BLOC / NUMTHREADS;
+            for ( i = 0; i < S; i++ ) {
                 for ( j = 0; j < M_BLOC; j++ )
                     printf( "%d    ", Bloc[ OFFSET(b) + i ][j] );
                 printf( "\n" );
@@ -130,10 +137,18 @@ int main() {
 
     // Somma Bloc in C
     #pragma omp parallel for private(i,j,b) shared(Bloc,C) schedule(static) num_threads(NUMTHREADS)
-    for ( i = 0; i < N_C; i++ ) {
+    for ( i = 0; i < N_C - off; i++ ) {
 		for ( j = 0; j < M_C; j++ ) {
             for ( b = 0; b < NUMTHREADS; b++ )
 			    C[i][j] += Bloc[ OFFSET(b) + i ][j];
+		}
+	}
+
+    // Somma Bloc in C
+    #pragma omp parallel for private(i,j,b) shared(Bloc,C) schedule(static) num_threads(NUMTHREADS)
+    for ( i = N_C - off; i < N_C; i++ ) {
+		for ( j = 0; j < M_C; j++ ) {
+			C[i][j] = Bloc[i][j];
 		}
 	}
 
