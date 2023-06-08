@@ -58,6 +58,8 @@ int main() {
     // Tempi
     double t1;
 	double t2;
+
+    int i, j, b;
 	
 	srand( time( NULL ) );
 	
@@ -102,9 +104,9 @@ int main() {
 			C[i][j] = 0;
 
 	// Calcolo della matrice trasposta
-	#pragma omp parallel for shared(Bloc,matrix) schedule(static) num_threads(NUMTHREADS)
-	for ( int i = 0; i < N; i++ ) {
-		for ( int j = 0; j < M; j++ ) {
+	#pragma omp parallel for private(i,j) shared(Bloc,matrix) schedule(static) num_threads(NUMTHREADS)
+	for ( i = 0; i < N; i++ ) {
+		for ( j = 0; j < M; j++ ) {
 			Bloc[j][i] = matrix[i][j];
 		}
 	}
@@ -119,20 +121,20 @@ int main() {
 
     // Stampa dei Bloc
     #pragma omp master
-    for ( int b = 0; b < NUMTHREADS; b++ ) {
+    for ( b = 0; b < NUMTHREADS; b++ ) {
         printf( "\nBloc #%d\n", b );
-        for ( int i = 0; i < N_BLOC / NUMTHREADS; i++ ) {
-            for ( int j = 0; j < M_BLOC; j++ )
+        for ( i = 0; i < N_BLOC / NUMTHREADS; i++ ) {
+            for ( j = 0; j < M_BLOC; j++ )
                 printf( "%d    ", Bloc[ OFFSET(b) + i ][j] );
             printf( "\n" );
         }
     }
 
     // Somma Bloc in C
-    #pragma omp parallel for shared(Bloc,C) schedule(static) num_threads(NUMTHREADS)
-    for ( int i = 0; i < N_C; i++ ) {
-		for ( int j = 0; j < M_C; j++ ) {
-            for ( int b = 0; b < NUMTHREADS; b++ )
+    #pragma omp parallel for private(i,j,b) shared(Bloc,C) schedule(static) num_threads(NUMTHREADS)
+    for ( i = 0; i < N_C; i++ ) {
+		for ( j = 0; j < M_C; j++ ) {
+            for ( b = 0; b < NUMTHREADS; b++ )
 			    C[i][j] += Bloc[ OFFSET(b) + i ][j];
 		}
 	}
