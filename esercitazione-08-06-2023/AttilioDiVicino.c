@@ -139,7 +139,7 @@ int main() {
     }
 
     // Somma Bloc in C
-    #pragma omp parallel for private(i,j,b) shared(Bloc,C) schedule(static) num_threads(NUMTHREADS)
+    #pragma omp parallel for private(i,j,b) shared(Bloc,C,off) schedule(static) num_threads(NUMTHREADS)
     for ( i = 0; i < N_C - off; i++ ) {
 		for ( j = 0; j < M_C; j++ ) {
             for ( b = 0; b < NUMTHREADS; b++ )
@@ -148,7 +148,7 @@ int main() {
 	}
 
     // Somma Bloc in C
-    #pragma omp parallel for private(i,j,b) shared(Bloc,C) schedule(static) num_threads(NUMTHREADS)
+    #pragma omp parallel for private(i,j) shared(Bloc,C,off) schedule(static) num_threads(NUMTHREADS)
     for ( i = N_C - off; i < N_C; i++ ) {
 		for ( j = 0; j < M_C; j++ ) {
 			C[i][j] = Bloc[i][j];
