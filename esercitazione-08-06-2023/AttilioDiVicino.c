@@ -81,6 +81,9 @@ int main() {
 	printf( "\nInserisci il numero di righe: " );
 	scanf( "%d", &M );
 
+    // Off viene utilizzato nel caso in cui 
+    // le colonne di A non siano divisibili 
+    // per il numero di thread utilizzati
     int off = M % NUMTHREADS;
 	
 	printf( "\nMatrix -> N: %d, M: %d", N, M );
