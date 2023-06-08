@@ -68,8 +68,8 @@ int main() {
     int** C;
 
     // Tempi
-    double t1;
-	double t2;
+    double startTime = 0.0;
+	double endTime = 0.0;
 
     int i, j, b;
 	
@@ -99,7 +99,7 @@ int main() {
     initMatrix( &C, N_C, M_C );
 
     // Prendiamo il tempo di inizio
-	t1 = omp_get_wtime();
+	startTime = omp_get_wtime();
 
 	// Calcolo della matrice trasposta
 	#pragma omp parallel for private(i,j) shared(Bloc,matrix) schedule(static) num_threads(NUMTHREADS)
@@ -137,17 +137,17 @@ int main() {
 		}
 	}
 
+    // Prendiamo il tempo di fine
+	endTime = omp_get_wtime();
+
     // Stampo C ed i tempi
     #pragma omp master
     {
         printMatrix( C, N_C, M_C, "Matrice finale C" );
-        printf( "\nStampa t1: %f", t1 );
-        printf( "\nStampa t2: %f", t2 );
-        printf( "\nTempo finale: %f", t2-t1 );
+        printf( "\nStampa t1: %f", startTime );
+        printf( "\nStampa t2: %f", endTime );
+        printf( "\nTempo finale: %f", endTime - startTime );
     }
-
-    // Prendiamo il tempo di fine
-	t2 = omp_get_wtime();
 	
 	printf( "\n" );
 	return 0;
