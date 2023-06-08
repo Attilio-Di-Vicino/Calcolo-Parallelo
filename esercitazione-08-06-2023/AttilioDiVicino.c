@@ -144,8 +144,8 @@ int main() {
     #pragma omp master
     {
         printMatrix( C, N_C, M_C, "Matrice finale C" );
-        printf( "\nStampa t1: %f", startTime );
-        printf( "\nStampa t2: %f", endTime );
+        printf( "\nTempo di inizio: %f", startTime );
+        printf( "\nTempo di fine: %f", endTime );
         printf( "\nTempo finale: %f", endTime - startTime );
     }
 	
