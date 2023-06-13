@@ -6,10 +6,10 @@
 
 #include <omp.h>
 
-void main() {
+int main() {
 
     // Variabili generali
-    int a,b,c;
+    int a, b, c;
 
     // { Parte sequenziale eseguita dal thread master }
 
@@ -23,4 +23,5 @@ void main() {
     }
 
     // Ripresa del codice sequenziale
+    return 0;
 }
