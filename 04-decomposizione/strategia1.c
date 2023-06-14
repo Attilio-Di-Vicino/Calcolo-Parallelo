@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 #define SIZE 100
-#define MAXVALUE 99
+#define MAXVALUE 1
 
 int main() {
 
@@ -48,7 +48,7 @@ int main() {
      * e sicuro, con OpenMP che si occupa internamente della sincronizzazione e dell'aggregazione
      * dei valori parziali tra i thread.
      */
-    #pragma omp parallel for reduction(+:sum)
+    #pragma omp parallel for shared(numbers) reduction(+:sum)
     for ( int i = 0; i < SIZE; i++ ) {
         sum += numbers[i];
     }
