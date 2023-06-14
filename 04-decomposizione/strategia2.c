@@ -29,23 +29,33 @@ int main() {
         printf( "%d ", numbers[i] );
     
     // Strategia 2: Somma parallela utilizzando "reduction" con passi iterativi
-    #pragma omp parallel
+    #pragma omp parallel shared(sum,numbers)
     {
         int numThreads = omp_get_num_threads();
         int threadID = omp_get_thread_num();
-        int localSum = 0;
+        int partialSum = 0;
+        int totalIterations = 0;
+
+        #pragma omp master
+        {
+            printf( "\n\nI'm Thread %d and i'm here to print the total number of threads", threadID );
+            printf( "\nTotal Thread are: %d\n", numThreads );
+        }
         
         // Calcolo della somma parziale
         for ( int i = threadID; i < SIZE; i += numThreads ) {
-            localSum += numbers[i];
+            partialSum += numbers[i];
+            totalIterations++;
         }
+
+        printf( "\nI'm Thread %d and have done %d iteration", threadID, totalIterations );
         
         // Riduzione delle somme parziali
         #pragma omp critical
-        sum += localSum;
+        sum += partialSum;
     }
     
-    printf("\nSomma utilizzando la strategia 2: %d\n", sum);
+    printf( "\nSomma utilizzando la strategia 2: %d\n", sum );
     
     return 0;
 }
