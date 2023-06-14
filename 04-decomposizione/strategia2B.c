@@ -1,7 +1,8 @@
 /**
- * STRATEGIA: 2
+ * STRATEGIA: 2B
  * 
  * Somma n numeri utilizzando la seconda strategia
+ * ed utilizzando un metodo alternativo e più semplice da implementare
 */
 
 #include <stdio.h>
@@ -10,7 +11,7 @@
 #include <stdlib.h>
 
 #define SIZE 100
-#define MAXVALUE 1
+#define MAXVALUE 99
 
 int main() {
 
@@ -48,14 +49,14 @@ int main() {
             totalIterations++;
         }
 
-        printf( "\nI'm Thread %d and have done %d iteration", threadID, totalIterations );
+        printf( "\nI'm Thread %d and have done %d iterations", threadID, totalIterations );
         
         // Riduzione delle somme parziali
         #pragma omp critical
         sum += partialSum;
     }
     
-    printf( "\nSomma utilizzando la strategia 2: %d\n", sum );
+    printf( "\nSum using strategy 2B: %d\n", sum );
     
     return 0;
 }

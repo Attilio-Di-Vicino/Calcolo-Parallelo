@@ -53,7 +53,7 @@ int main() {
         sum += numbers[i];
     }
     
-    printf( "\nSomma utilizzando la strategia 1: %d\n", sum );
+    printf( "\nSum using strategy 1: %d\n", sum );
     
     return 0;
 }
