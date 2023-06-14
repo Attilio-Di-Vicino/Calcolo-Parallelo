@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 #define SIZE 100
-#define MAXVALUE 1
+#define MAXVALUE 99
 
 int main() {
 
