@@ -1,5 +1,5 @@
 /**
- * FULLPARALLEL: strategia 1
+ * FULLPARALLEL:
  * 
  * Somma di due vettori di lunghezza N
 */
@@ -40,16 +40,12 @@ int main() {
     printVector( vectorB, SIZE, "Vector B" );
     printVector( vectorC, SIZE, "Vector C" );
 
-    /**
-     * Somma di due vettori di lunghezza N
-     * utilizzando la prima strategia 
-    */
-    #pragma omp parallel for
+    #pragma omp parallel for shared(vectorA,vectorB,vectorC)
     for ( int i = 0; i < SIZE; i++ )
         vectorC[i] = vectorA[i] + vectorB[i];
 
     printVector( vectorC, SIZE, "Computed Vector C" );
-    printVector( vectorC, SIZE, "Result Vector C" );
+    printVector( twoVectorTest.vectorC, SIZE, "Result Vector C" );
 
     return 0;
 }
