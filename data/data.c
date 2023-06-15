@@ -1,3 +1,8 @@
+/**
+ * File contenente dati per effettuare test
+ * con somme gia eseguite manualmente
+*/
+
 // la somma di questo array è: 4987
 int numbers[ 100 ] = {  27, 12, 72, 89, 7, 85, 64, 18, 31, 68, 22, 98,
                         34, 68, 79, 33, 10, 14, 6, 35, 8, 3, 95, 35, 63,
