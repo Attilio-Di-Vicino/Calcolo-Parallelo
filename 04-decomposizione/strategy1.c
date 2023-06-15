@@ -8,6 +8,7 @@
 #include <omp.h>
 #include <time.h>
 #include <stdlib.h>
+#include "../dataTest/data.c"
 
 #define SIZE 100
 #define MAXVALUE 99
