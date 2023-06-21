@@ -30,33 +30,10 @@
 #define N_C ( M / NUMTHREADS ) + ( M % NUMTHREADS ) // Numero di righe della matrice C
 #define M_C N // Numero di colonne della matrice C
 
-void printMatrix( int** matrix, int N, int M, char name[] ) {
-    printf( "\n%s:\n", name );
-    for ( int i = 0; i < N; i++ ) {
-        for ( int j = 0; j < M; j++ )
-            printf( "%d	", matrix[i][j] );
-        printf( "\n" );
-    }
-}
-
-void allocationMatrix( int*** matrix, int N, int M ) {
-    *matrix = ( int** ) calloc( N, sizeof( int* ) );
-	for ( int i = 0; i < N; i++ )
-		( *matrix )[i] = ( int* ) calloc( M, sizeof( int ) );
-}
-
-void initMatrix( int*** matrix, int N, int M ) {
-	for ( int i = 0; i < N; i++ )
-		for ( int j = 0; j < M; j++ )
-            ( *matrix )[i][j] = 0;
-}
-
-void deallocationMatrix( int*** matrix, int N ) {
-    for ( int i = 0; i < N; i++ )
-        free( ( *matrix )[i] );
-    free( *matrix);
-}
-
+void deallocationMatrix( int***, int );
+void initMatrix( int***, int, int );
+void allocationMatrix( int***, int, int );
+void printMatrix( int**, int, int, char[] );
 int main() {
 
 	int N, M, NP;
@@ -183,4 +160,31 @@ int main() {
 	
 	printf( "\n" );
 	return 0;
+}
+
+void printMatrix( int** matrix, int N, int M, char name[] ) {
+    printf( "\n%s:\n", name );
+    for ( int i = 0; i < N; i++ ) {
+        for ( int j = 0; j < M; j++ )
+            printf( "%d	", matrix[i][j] );
+        printf( "\n" );
+    }
+}
+
+void allocationMatrix( int*** matrix, int N, int M ) {
+    *matrix = ( int** ) calloc( N, sizeof( int* ) );
+	for ( int i = 0; i < N; i++ )
+		( *matrix )[i] = ( int* ) calloc( M, sizeof( int ) );
+}
+
+void initMatrix( int*** matrix, int N, int M ) {
+	for ( int i = 0; i < N; i++ )
+		for ( int j = 0; j < M; j++ )
+            ( *matrix )[i][j] = 0;
+}
+
+void deallocationMatrix( int*** matrix, int N ) {
+    for ( int i = 0; i < N; i++ )
+        free( ( *matrix )[i] );
+    free( *matrix);
 }
