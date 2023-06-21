@@ -1,5 +1,5 @@
 /**
-* ESERCITAZIONE:
+* ESERCITAZIONE: 08/06/2023
 * 
 * Implementare un programma parallelo per l'ambiente multicore con np
 * unità processanti che impieghi la libreria OpenMP. Il programma deve
