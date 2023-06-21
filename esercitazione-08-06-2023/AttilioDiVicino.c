@@ -51,6 +51,12 @@ void initMatrix( int*** matrix, int N, int M ) {
             ( *matrix )[i][j] = 0;
 }
 
+void deallocationMatrix( int*** matrix, int N ) {
+    for ( int i = 0; i < N; i++ )
+        free( ( *matrix )[i] );
+    free( *matrix);
+}
+
 int main() {
 
 	int N, M, NP;
@@ -169,6 +175,11 @@ int main() {
         printf( "\nTempo di fine: %f", endTime );
         printf( "\nTempo finale: %f", endTime - startTime );
     }
+
+    // Deallocazioni
+    deallocationMatrix( &matrix, N );
+    deallocationMatrix( &Bloc, N_BLOC );
+    deallocationMatrix( &C, N_C );
 	
 	printf( "\n" );
 	return 0;
