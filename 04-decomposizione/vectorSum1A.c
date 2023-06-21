@@ -1,5 +1,5 @@
 /**
- * STRATEGIA: 2
+ * STRATEGIA: 1A
  * 
  * Somma n numeri utilizzando la seconda strategia
  * utilizzando il classico metodo 
@@ -34,7 +34,7 @@ int main() {
     for ( int i = 0; i < SIZE; i++ )
         printf( "%d ", numbers[i] );
     
-    // Strategia 2: Somma parallela utilizzando "reduction" con passi iterativi
+    // Strategia 1: Somma parallela utilizzando "reduction" con passi iterativi
     #pragma omp parallel private(nloc,step,index) shared(sum,numbers)
     {
         int numThreads = omp_get_num_threads();

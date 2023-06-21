@@ -1,7 +1,7 @@
 /**
- * STRATEGIA: 1
+ * STRATEGIA: 2
  * 
- * Somma n numeri utilizzando la prima strategia
+ * Somma n numeri utilizzando la seconda strategia
 */
 
 #include <stdio.h>
@@ -30,7 +30,7 @@ int main() {
         printf( "%d ", numbers[i] );
     
     /**
-     * Strategia 1: Somma parallela utilizzando l'approccio di "reduction"
+     * Strategia 2: Somma parallela utilizzando l'approccio di "reduction"
      * 
      * In questa strategia, utilizziamo la clausola 'reduction' con la variabile
      * condivisa 'sum' e l'operatore '+' per indicare che ogni thread calcola
