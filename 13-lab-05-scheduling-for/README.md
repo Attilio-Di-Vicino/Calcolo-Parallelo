@@ -1,7 +1,6 @@
 # Laboratorio 13: Scheduling e for
 
-## Descrizione
-Il presente laboratorio si focalizza sullo studio del costrutto FOR e sulle modalità di suddivisione automatica delle iterazioni tra i thread.
+## Osservazioni
 - Il costrutto FOR divide automaticamente le iterazioni di un ciclo for tra i thread.
 - A seconda del programma, la modalità di scheduling predefinita (modalità STATIC) potrebbe non essere ottimale.
 
