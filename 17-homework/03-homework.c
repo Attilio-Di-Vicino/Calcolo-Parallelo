@@ -9,32 +9,36 @@
 #include <omp.h>
 #include <time.h>
 
-#define N 8
+#define N 16
 #define M 16
 #define MAXVALUE 9
 
 int main() {
     int** matrix;
+    int numThreads;
+    int id;
+    int startRow;
+    int startCol;
 
     srand( time( NULL ) );
 
-    matrix = ( int** ) calloc( M, sizeof( int* ) );
+    matrix = ( int** ) calloc( N, sizeof( int* ) );
 
     #pragma omp parallel for shared(matrix)
-    for ( int i = 0; i < M; i++ )
-        matrix[i] = ( int* ) calloc( N, sizeof( int ) );
+    for ( int i = 0; i < N; i++ )
+        matrix[i] = ( int* ) calloc( M, sizeof( int ) );
     
+    // Da correggere
     #pragma omp parallel for shared(matrix)
-    for ( int i = 0; i < M; i++ ) {
-        for ( int j = 0; j < N; j++ ) {
-            printf( "\nThread %d inserisce nella riga %d, colonna %d", omp_get_thread_num(), j, i );
-            matrix[i][j] = rand() % MAXVALUE + 1;
+    for ( int i = 0; i < N; i++ ) {
+        for ( int j = 0; j < M; j++ ) {
+            matrix[i][j] = omp_get_thread_num();
         }
     }
 
     printf( "\nMatrix:\n" );
-    for ( int i = 0; i < M; i++ ) {
-        for ( int j = 0; j < N; j++ )
+    for ( int i = 0; i < N; i++ ) {
+        for ( int j = 0; j < M; j++ )
             printf( "%d    ", matrix[i][j] );
         printf( "\n" );
     }
