@@ -36,7 +36,7 @@ int main( int argc, char* argv[] ) {
     A = ( double* ) malloc( M * N * sizeof( double ) );
     b = ( double* ) malloc( N * sizeof( double ) );
     a = ( double* ) malloc( M * sizeof( double ) );
-    R = ( double* ) malloc( M * sizeof( double ) );
+    R = ( double* ) calloc( M, sizeof( double ) );
 
     // Generazioni numeri pseudo-casuali
     for( i = 0; i < M; i++ ) {
@@ -70,7 +70,7 @@ int main( int argc, char* argv[] ) {
     for( i = 0; i < M; i++ ) 
         printf( "%lf ", R[i] );
     printf( "\n" );
-    
+
     printf( "\nOps: %d\n", ops );
     printf( "\nElapsed Time: %lf sec\n", tempotot );
 
