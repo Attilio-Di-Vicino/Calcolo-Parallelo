@@ -66,6 +66,7 @@ int main( int argc, char* argv[] ) {
     printf( "\nR: " );
     for( i = 0; i < M; i++ ) 
         printf( "%lf ", R[i] );
+        
     printf( "\nElapsed Time : %lf s\n", tempotot);
 
     free(A);
