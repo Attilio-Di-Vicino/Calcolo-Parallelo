@@ -11,6 +11,7 @@ int main( int argc, char* argv[] ) {
     double *A, *b , *a , *R;
     double p = 0.00f;
     double t0, t1, tempotot;
+    int ops = 0; // contatore relativo al numero totale di operazioni eseguite
 
     srand( time( NULL ) );
 
@@ -52,6 +53,8 @@ int main( int argc, char* argv[] ) {
     for ( i = 0; i < M; i++ ) {
         for ( j = 0; j < N; j++ ) {
             R[i] += alpha * A[ i * N + j ] * b[j];
+            #pragma omp critical
+            ops++;
         }
         R[i] += ( a[i] * beta );
     }
@@ -66,8 +69,10 @@ int main( int argc, char* argv[] ) {
     printf( "\nR: " );
     for( i = 0; i < M; i++ ) 
         printf( "%lf ", R[i] );
-        
-    printf( "\nElapsed Time : %lf s\n", tempotot);
+    printf( "\n" );
+    
+    printf( "\nOps: %d\n", ops );
+    printf( "\nElapsed Time: %lf sec\n", tempotot );
 
     free(A);
     free(b);
