@@ -30,25 +30,3 @@ Tutti i programmi presenti nella repository sfruttano le potenzialità offerte d
 
 Se desideri contribuire a questo progetto, puoi clonare la repository, apportare le modifiche desiderate e inviare una pull request. Sarà valutata e integrata se ritenuta appropriata.
 erimento per gli studenti che desiderano esplorare il mondo dell'informatica parallela e scoprire le meraviglie del calcolo distribuito.
-
-## Caratteristiche principali
-
-- Implementazione di vari nuclei computazionali, come la somma di N numeri, la somma di due vettori di lunghezza N e il prodotto scalare tra due vettori.
-- Algoritmi avanzati per la moltiplicazione di matrici, sfruttando due diverse strategie di raccolta dei dati.
-- Decomposizione a blocchi delle matrici con tre strategie diverse: blocchi riga, blocchi colonna e blocchi riga-colonna.
-- Soluzioni parallele per il problema comune "SAXPY", che offre infinite possibilità di applicazione in diversi campi.
-- Esercitazioni stimolanti per mettere in pratica le competenze apprese e sfidare le vostre abilità nel calcolo parallelo.
-
-## Come iniziare
-
-È semplice come un **git clone**! Basta digitare il seguente comando nel tuo terminale preferito:
-
-```shell
-git clone https://github.com/Attilio-Di-Vicino/Calcolo-Parallelo.git
-```
-
-Ora sei pronto per immergerti nel mondo del calcolo parallelo e scoprire le soluzioni innovative che abbiamo preparato per te!
-
-## Contribuire
-
-Siamo felici di accogliere contributi da parte di tutti gli appassionati di calcolo parallelo! Se hai idee, suggerimenti o correzioni da proporre, non esitare a inviare una pull request. Insieme possiamo rendere Calcolo-Parallelo ancora più incredibile!
