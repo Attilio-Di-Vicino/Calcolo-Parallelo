@@ -2,16 +2,13 @@
 
 Questo repository è stato creato appositamente per supportare il corso di Calcolo Parallelo - Parte Laboratorio nell'ambito dell'esame di Informatica presso l'Università di Napoli "Parthenope". La libreria OpenMP viene utilizzata per l'implementazione dei programmi paralleli presenti nella repository.
 
-<p align="center">
-  <img src="https://i.imgur.com/NyVtGzL.gif" alt="Parallel Computing GIF">
-</p>
-
 ## Come iniziare
 
 È semplice come un **git clone**! Basta digitare il seguente comando nel tuo terminale preferito:
 
 ```shell
 git clone https://github.com/Attilio-Di-Vicino/Calcolo-Parallelo.git
+```
 
 ## Contenuto della repository
 
