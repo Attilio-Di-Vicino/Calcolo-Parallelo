@@ -24,7 +24,7 @@ La repository contiene diversi nuclei computazionali implementati utilizzando Op
 
 ## Utilizzo di OpenMP
 
-Tutti i programmi presenti nella repository sfruttano le potenzialità offerte dalla libreria OpenMP per la programmazione parallela. OpenMP fornisce costrutti ad alto livello come `for`, `sections`, ecc., che semplificano l'implementazione del parallelismo. Inoltre, in alcuni casi, viene utilizzato il costrutto `parallel` per gestire manualmente la distribuzione del lavoro ai thread generati dopo la fork-join.
+Tutti i programmi presenti nella repository sfruttano le potenzialità offerte dalla libreria OpenMP per la programmazione parallela. OpenMP fornisce direttive ad alto livello come `for`, `sections`, ecc., che semplificano l'implementazione del parallelismo. Inoltre, in alcuni casi, viene utilizzato esclusivamenta la direttiva `#pragma omp parallel` per gestire manualmente la distribuzione del lavoro ai thread generati dopo la fork-join.
 
 ## Contribuire
 
