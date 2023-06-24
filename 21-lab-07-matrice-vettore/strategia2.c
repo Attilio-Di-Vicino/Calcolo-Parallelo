@@ -9,7 +9,7 @@
 #include <omp.h>
 #include <time.h>
 
-#define N 16
+#define N 8
 #define M 8
 #define VECTORSIZE N
 #define RESULTVECTORSIZE M

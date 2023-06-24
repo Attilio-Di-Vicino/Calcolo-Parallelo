@@ -3,7 +3,7 @@
 #include <omp.h>
 #include <time.h>
 
-#define MAXVALUE 1000
+#define MAXVALUE 1
 
 int main( int argc, char* argv[] ) {
 
@@ -49,24 +49,14 @@ int main( int argc, char* argv[] ) {
 
     t0 = omp_get_wtime();
 
-    #pragma omp parallel for schedule(static) shared(N,M,A,b,a,R,alpha,beta) private(i,j) num_threads(nThreads)
-    for ( i = 0; i < M; i++ ) {
-        for ( j = 0; j < N; j++ ) {
-            R[i] += alpha * A[ i * N + j ] * b[j];
-            #pragma omp critical
-            ops++;
-        }
-        R[i] += ( a[i] * beta );
-    }
-
-    #pragma omp parallel sections shared(N,M,A,b,a,R,alpha,beta) private(i,j) num_threads(2)
+    #pragma omp parallel sections shared(N,M,A,b,a,R,alpha,beta) private(i,j) num_threads(nThreads)
     {
         #pragma omp section
         {
             for ( i = 0; i < M; i++ ) {
                 for ( j = 0; j < N; j++ ) {
                     R[i] += alpha * A[ i * N + j ] * b[j];
-                    // #pragma omp critical
+                    #pragma omp critical
                     ops++;
                 }
             }
