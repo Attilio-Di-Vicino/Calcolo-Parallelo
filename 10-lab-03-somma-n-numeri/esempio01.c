@@ -25,6 +25,11 @@ int main() {
     // Stampa 
     printVector( a, N, "Vector A:" );
 
+    /**
+     * Nucleo computazionale con collezione di dati
+     * utilizzando la strategia 1, ed la ridistribuzione 
+     * manuale delle locazioni con i thread
+    */
     #pragma omp parallel private(sum,nloc,i,step,id) shared(sumtot,rest)
     { // se piu di un’istruzione
         
