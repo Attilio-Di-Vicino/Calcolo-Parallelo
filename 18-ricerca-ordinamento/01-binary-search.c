@@ -54,7 +54,7 @@ int binarySearch( int l, int r, int key, int n, int *a ) {
      * si imposta l'abilitazione delle regioni parallele annidate.
      * Ciò significa che è possibile creare regioni parallele all'interno di
      * altre regioni parallele e i thread possono essere creati per
-     * l'esecuzione di queste regioni annidate.
+     * l'esecuzione di queste regioni annidate. 
     */
     omp_set_nested(1);
     

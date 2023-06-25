@@ -38,7 +38,7 @@ void oddEvenSort( int* a, int N ) {
     while( sw || start ) {
         sw = 0 ;
         
-        #pragma omp parallel for private( temp )
+        #pragma omp parallel for private( temp ) 
         for ( i = start ; i < N - 1 ; i += 2) {
             if ( a [i] > a [ i + 1 ] ) {
                 temp = a [ i ] ;
