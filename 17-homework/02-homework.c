@@ -15,26 +15,27 @@
 
 int main() {
     int** matrix;
+    int i,j;
 
     srand( time( NULL ) );
 
     matrix = ( int** ) calloc( M, sizeof( int* ) );
 
-    #pragma omp parallel for shared(matrix)
-    for ( int i = 0; i < M; i++ )
+    #pragma omp parallel for shared(matrix) private(i)
+    for ( i = 0; i < M; i++ )
         matrix[i] = ( int* ) calloc( N, sizeof( int ) );
     
-    #pragma omp parallel for shared(matrix)
-    for ( int i = 0; i < M; i++ ) {
-        for ( int j = 0; j < N; j++ ) {
+    #pragma omp parallel for shared(matrix) private(i,j)
+    for ( i = 0; i < M; i++ ) {
+        for ( j = 0; j < N; j++ ) {
             printf( "\nThread %d inserisce nella riga %d, colonna %d", omp_get_thread_num(), j, i );
             matrix[i][j] = rand() % MAXVALUE + 1;
         }
     }
 
     printf( "\nMatrix:\n" );
-    for ( int i = 0; i < M; i++ ) {
-        for ( int j = 0; j < N; j++ )
+    for ( i = 0; i < M; i++ ) {
+        for ( j = 0; j < N; j++ )
             printf( "%d    ", matrix[i][j] );
         printf( "\n" );
     }
