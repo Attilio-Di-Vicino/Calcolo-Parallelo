@@ -92,7 +92,7 @@ int main() {
     // Prendiamo il tempo di inizio
 	startTime = omp_get_wtime();
 
-	// Calcolo della matrice trasposta
+	// Calcolo della matrice trasposta 
 	#pragma omp parallel for private(i,j) shared(Bloc,matrix) schedule(static) num_threads(NUMTHREADS)
 	for ( i = 0; i < N; i++ ) {
 		for ( j = 0; j < M; j++ ) {
