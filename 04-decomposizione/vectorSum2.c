@@ -40,11 +40,6 @@ int main() {
      * e che l'operatore '+' deve essere utilizzato per aggregare correttamente i valori
      * parziali tra i thread.
      * 
-     * Ogni thread calcola la sua somma parziale e la salva in una copia locale della
-     * variabile 'sum'. Alla fine dell'esecuzione dei thread, il thread master
-     * combina automaticamente le copie locali delle variabili 'sum' utilizzando
-     * l'operatore '+', ottenendo così il risultato finale della somma totale.
-     * 
      * Questo approccio garantisce che i calcoli paralleli siano eseguiti in modo corretto
      * e sicuro, con OpenMP che si occupa internamente della sincronizzazione e dell'aggregazione
      * dei valori parziali tra i thread.

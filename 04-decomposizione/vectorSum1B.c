@@ -1,7 +1,7 @@
 /**
  * STRATEGIA: 1B
  * 
- * Somma n numeri utilizzando la seconda strategia
+ * Somma n numeri utilizzando la prima strategia
  * ed utilizzando un metodo alternativo e più semplice da implementare
 */
 
@@ -17,20 +17,31 @@ int main() {
 
     int numbers[ SIZE ];
     int sum = 0;
+    int i;
 
     srand( time( NULL ) );
     
     // Inizializzazione dell'array
-    for ( int i = 0; i < SIZE; i++ )
+    for ( i = 0; i < SIZE; i++ )
         numbers[i] = rand() % MAXVALUE + 1;
 
     // Stampa dell'array
     printf( "\nNumbers: " );
-    for ( int i = 0; i < SIZE; i++ )
+    for ( i = 0; i < SIZE; i++ )
         printf( "%d ", numbers[i] );
     
-    // Strategia 1: Somma parallela utilizzando "reduction" con passi iterativi
-    #pragma omp parallel shared(sum,numbers)
+    /**
+     * Il nucleo computazionale in questo caso non è Full Parallel,
+     * di conseguenza abbiamo bisogno di una strategia c'è ci permetta
+     * di gestire la collezione dei dati.
+     * In questo caso viene applicata la strategia 1, dove tutti i thread
+     * hanno una memoria condivisa e in maniera sequenziale vanno ad aggiungere
+     * la propria somma parziale precedentemente calcolata alla somma totale
+     * la quale si trova in memoria condivisa, di conseduenza è soggetta a race condiction,
+     * infatti tra le clause della direttiva sum è dichiarata shared, in questo modo
+     * si protegge la variabile da eventuali problemi di race
+    */
+    #pragma omp parallel shared(sum,numbers) private(i)
     {
         int numThreads = omp_get_num_threads();
         int threadID = omp_get_thread_num();
@@ -44,15 +55,13 @@ int main() {
         }
         
         // Calcolo della somma parziale
-        for ( int i = threadID; i < SIZE; i += numThreads ) {
+        for ( i = threadID; i < SIZE; i += numThreads ) {
             partialSum += numbers[i];
             totalIterations++;
         }
 
         printf( "\nI'm Thread %d and have done %d iterations", threadID, totalIterations );
         
-        // Riduzione delle somme parziali
-        #pragma omp critical
         sum += partialSum;
     }
     

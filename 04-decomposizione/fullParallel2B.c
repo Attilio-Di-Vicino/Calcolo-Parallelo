@@ -30,9 +30,12 @@ int main() {
 
     int numThread = 0;
     int threadID = 0;
+    int i;
 
     srand( time( NULL ) );
 
+    // In questo caso vengono utilizzati dei dati
+    // i quali gia si conoscono i risultati
     for ( int i = 0; i < SIZE; i++ ) {
         vectorA[i] = twoVectorTest.vectorA[i];
         vectorB[i] = twoVectorTest.vectorB[i];
@@ -43,12 +46,24 @@ int main() {
     printVector( vectorB, SIZE, "Vector B" );
     printVector( vectorC, SIZE, "Vector C" );
 
-    #pragma omp parallel shared(vectorA,vectorB,vectorC,numThread) private(threadID)
+    /**
+     * La somma di due vettori di lunghezza N è un nucleo computazionale
+     * il quale viene definito Full Parallel, di conseguenza
+     * non ci sono collezioni di dati.
+     * Di seguito viene mostrato un blocco di codice parallelo
+     * utilizzato esclusivamente la direttiva 'parallel' essa esegue quindi
+     * una fork-join senza andare a distribuire le celle del vettore nei thread presenti,
+     * di conseguenza la distribuzione deve essere gestita manualmente, e per fare ciò
+     * viene utilizzata una tecnica diversa da quella più comune, la quale è
+     * meno intuibile, ma più semplice da implementare.
+     * Il risultato non cambia
+    */
+    #pragma omp parallel shared(vectorA,vectorB,vectorC,numThread) private(i,threadID)
     {
         numThread = omp_get_num_threads();
         threadID = omp_get_thread_num();
 
-        for ( int i = threadID; i < SIZE; i += numThread ) {
+        for ( i = threadID; i < SIZE; i += numThread ) {
             vectorC[i] = vectorA[i] + vectorB[i];
         }
     }
