@@ -46,7 +46,7 @@ int main()
 	*	- variabili private
 	*	- variabili condivise
 	*	- il tipo di scheduler 
-	* Eseguiamo quindi il prodotto puntuale tra due vettori
+	* Eseguiamo quindi il prodotto puntuale tra due vettori 
 	*/
 	#pragma omp parallel for private(i) shared(a,b,c) schedule(static)	
 	for ( i = 0; i < N; i++ )
