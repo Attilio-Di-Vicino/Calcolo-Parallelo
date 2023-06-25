@@ -1,6 +1,6 @@
 /**
  * File contenente dati per effettuare test
- * con somme gia eseguite manualmente
+ * con somme gia eseguite manualmente 
 */
 
 struct sumVec {
