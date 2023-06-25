@@ -42,6 +42,7 @@ int main() {
     else 
         numThread = N;
 
+    // Estrazione della diagonale
     #pragma omp parallel for schedule(static) private(i) shared(matrix,vector,N) num_threads(numThread)
     for ( i = 0; i < N; i++ ) {
         vector[i] = matrix[i][i];
@@ -50,6 +51,7 @@ int main() {
     printVector( vector, N, "After Vector:" );
 
     max = OVER;
+    // Ricerca del massimo
     #pragma omp parallel for schedule(static) private(i) shared(vector,N,max) num_threads(numThread)
     for ( i = 0; i < N; i++ ) {
         if ( vector[i] > max )
