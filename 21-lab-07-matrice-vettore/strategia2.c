@@ -36,8 +36,8 @@ int main() {
     printVector( result, RESULTVECTORSIZE, "Result Vector before" );
 
     #pragma omp parallel for default(none) shared(matrix,vector,result) private(i,j)
-    for ( int i = 0; i < M; i++ ) {
-        for ( int j = 0; j < N; j++ ) {
+    for ( i = 0; i < M; i++ ) {
+        for ( j = 0; j < N; j++ ) {
             result[i] += matrix[i][j] * vector[j];
         }
     }
