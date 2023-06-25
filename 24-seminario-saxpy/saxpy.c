@@ -47,7 +47,7 @@ int main( int argc, char* argv[] ) {
     for( i = 0; i < N; i++ )
         b[i] = ( double ) ( rand() % MAXVALUE + 1 ) / MAXVALUE;
 
-    t0 = omp_get_wtime();
+    t0 = omp_get_wtime(); 
 
     #pragma omp parallel for schedule(static) shared(N,M,A,b,a,R,alpha,beta) private(i,j) num_threads(nThreads)
     for ( i = 0; i < M; i++ ) {
