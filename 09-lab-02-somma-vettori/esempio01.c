@@ -30,6 +30,11 @@ int main() {
     printVector( a, N, "Vector A:" );
     printVector( b, N, "Vector B:" );
 
+    /**
+     * Nucleo computazionale full parallel
+     * tecnica semplificata per la ri-distribuzione delle locazione
+     * pensata solo per size divisibili per il numero di thread
+    */
     #pragma omp parallel private(nloc, i, indice) shared(a, b, c)
     { // se piu di un’istruzione
         
