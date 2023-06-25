@@ -49,6 +49,7 @@ int main( int argc, char* argv[] ) {
 
     t0 = omp_get_wtime();
 
+    // Le operaizioni SAXPY sono indipendenti
     #pragma omp parallel sections shared(N,M,A,b,a,R,alpha,beta) private(i,j) num_threads(nThreads)
     {
         #pragma omp section

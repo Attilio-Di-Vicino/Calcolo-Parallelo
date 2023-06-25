@@ -4,6 +4,10 @@
 
 int main() {
 
+    /**
+     * La direttiva section distribuisce appunto le sezioni
+     * del costrutto parallelo per i thread presenti in maniera automatica
+    */
     #pragma omp parallel sections num_threads(3)
     {
         #pragma omp section
