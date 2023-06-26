@@ -1,7 +1,11 @@
+/**
+ * SBAGLIATO:
+ * ALGORITMO NON FUNZIONANTE
+*/
 #include <stdio.h>
 #include <omp.h>
 
-#define N 8
+#define N 10
 #define BLOCK_SIZE 1
 
 int main() {
@@ -35,9 +39,17 @@ int main() {
             // Esempio: somma degli elementi di ogni riga
             int sum = 0;
             for (int k = 0; k < N; k++) {
-                sum += matrix[j][k];
+                matrix[j][k] = thread_id;
             }
         }
+    }
+
+    printf( "\nM:\n" );
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            printf( "%d    ", matrix[i][j] );
+        }
+        printf( "\n" );
     }
 
     return 0;
