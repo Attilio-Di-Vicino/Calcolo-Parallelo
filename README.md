@@ -4,7 +4,7 @@ Questo repository è stato creato appositamente per supportare il corso di Calco
 
 ## Come iniziare
 
-È semplice come un **git clone**! Basta digitare il seguente comando nel tuo terminale preferito:
+Clona il repository sul tuo sistema locale utilizzano **git clone**:
 
 ```shell
 git clone https://github.com/Attilio-Di-Vicino/Calcolo-Parallelo.git
