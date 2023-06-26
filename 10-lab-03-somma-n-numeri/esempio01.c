@@ -42,7 +42,7 @@ int main() {
             nloc++;
             step = 0;
         } else {
-            step = rest;
+            step = rest; 
         }
 
         printf( "sono %d, di %d: numeri %d\n", omp_get_thread_num(), t, nloc );
