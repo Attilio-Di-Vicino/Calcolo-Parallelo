@@ -36,8 +36,8 @@ int main() {
     printVector( result, RESULTVECTORSIZE, "Result Vector before" );
 
     #pragma omp parallel for default(none) shared(matrix,vector,result) private(i,j)
-    for ( i = 0; i < M; i++ ) {
-        for ( j = 0; j < N; j++ ) {
+    for ( j = 0; j < M; j++ ) {
+        for ( i = 0; i < N; i++ ) {
             result[i] += matrix[i][j] * vector[j];
         }
     }
@@ -48,16 +48,16 @@ int main() {
 }
 
 void allocationMatrixVector( int*** matrix, int** vector, int** result ) {
-    *matrix = ( int** ) calloc( M, sizeof( int* ) );
-    for ( int i = 0; i < M; i++ )
-        ( *matrix )[i] = ( int* ) calloc( N, sizeof( int ) );
+    *matrix = ( int** ) calloc( N, sizeof( int* ) );
+    for ( int i = 0; i < N; i++ )
+        ( *matrix )[i] = ( int* ) calloc( M, sizeof( int ) );
     *vector = ( int* ) calloc( VECTORSIZE, sizeof( int ) );
     *result = ( int* ) calloc( RESULTVECTORSIZE, sizeof( int ) );
 }
 
 void fillMatrixVector( int*** matrix, int** vector, int** result ) {
-    for ( int i = 0; i < M; i++ )
-        for ( int j = 0; j < N; j++ )
+    for ( int i = 0; i < N; i++ )
+        for ( int j = 0; j < M; j++ )
             ( *matrix )[i][j] = rand() % MAXVALUE + 1;
     for ( int i = 0; i < VECTORSIZE; i++ )
         ( *vector )[i] = rand() % MAXVALUE + 1;
@@ -67,8 +67,8 @@ void fillMatrixVector( int*** matrix, int** vector, int** result ) {
 
 void printMatrix( int** matrix, char name[] ) {
     printf( "\n%s:\n", name );
-    for ( int i = 0; i < M; i++ ) {
-        for ( int j = 0; j < N; j++ )
+    for ( int i = 0; i < N; i++ ) {
+        for ( int j = 0; j < M; j++ )
             printf( "%d    ", matrix[i][j] );
         printf( "\n" );
     }
@@ -82,7 +82,7 @@ void printVector( int* vector, int n, char name[] ) {
 }
 
 void deallocationMatrixVector( int*** matrix, int** vector, int** result ) {
-    for ( int i = 0; i < M; i++ )
+    for ( int i = 0; i < N; i++ )
         free( ( *matrix )[i] );
     free( *matrix );
     free( *vector );
