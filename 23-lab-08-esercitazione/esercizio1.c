@@ -23,7 +23,7 @@ int main() {
     int N;
     int** matrix;
     int* vector;
-    int max;
+    int maximum;
     int numThread;
     int i,j;
 
@@ -50,15 +50,15 @@ int main() {
 
     printVector( vector, N, "After Vector:" );
 
-    max = OVER;
+    maximum = OVER;
     // Ricerca del massimo
-    #pragma omp parallel for schedule(static) private(i) shared(vector,N,max) num_threads(numThread)
+    #pragma omp parallel for reduction(max:maximum) schedule(static) private(i) shared(vector,N) num_threads(numThread)
     for ( i = 0; i < N; i++ ) {
-        if ( vector[i] > max )
-            max = vector[i];
+        if ( vector[i] > maximum )
+            maximum = vector[i];
     }
 
-    printf( "\nMaximum: %d", max );
+    printf( "\nMaximum: %d", maximum );
 
     deallocationMatrixVector( &matrix, &vector, N );
     printf( "\n" );
