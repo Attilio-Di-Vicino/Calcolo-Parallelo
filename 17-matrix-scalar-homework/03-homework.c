@@ -26,7 +26,7 @@ int main() {
     for ( i = 0; i < N * M; i++ )
         matrix[i] = -1;
 
-    int numThreads = 4;
+    int numThreads = 8;
 
     // Funziona solo per 4 thread
     #pragma omp parallel num_threads(numThreads) shared(matrix) private(i,j)
