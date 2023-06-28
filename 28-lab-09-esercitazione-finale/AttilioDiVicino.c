@@ -118,7 +118,7 @@ int main() {
                 S = N_BLOC / NUMTHREADS;
             for ( i = 0; i < S; i++ ) {
                 for ( j = 0; j < M_BLOC; j++ )
-                    printf( "%d    ", Bloc[ OFFSET(b) + i ][j] );
+                    printf( "%d\t", Bloc[ OFFSET(b) + i ][j] );
                 printf( "\n" );
             }
         }
