@@ -10,7 +10,7 @@
 #include <time.h>
 
 #define N 8
-#define M 8
+#define M 16
 #define VECTORSIZE N
 #define RESULTVECTORSIZE M
 #define MAXVALUE 9
@@ -38,7 +38,7 @@ int main() {
     #pragma omp parallel for default(none) shared(matrix,vector,result) private(i,j)
     for ( j = 0; j < M; j++ ) {
         for ( i = 0; i < N; i++ ) {
-            result[i] += matrix[i][j] * vector[j];
+            result[j] += matrix[i][j] * vector[i];
         }
     }
 
