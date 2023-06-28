@@ -11,13 +11,10 @@
 
 #define N 16
 #define M 16
-#define MAXVALUE 9
 
 int main() {
     int** matrix;
     int i,j;
-
-    srand( time( NULL ) );
 
     matrix = ( int** ) calloc( N, sizeof( int* ) );
 
@@ -28,8 +25,7 @@ int main() {
     #pragma omp parallel for shared(matrix) private(i,j)
     for ( i = 0; i < N; i++ ) {
         for ( j = 0; j < M; j++ ) {
-            printf( "\nThread %d inserisce nella riga %d, colonna %d", omp_get_thread_num(), i, j );
-            matrix[i][j] = rand() % MAXVALUE + 1;
+            matrix[i][j] = omp_get_thread_num();
         }
     }
 
