@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <omp.h>
 
-#define N 10
+#define N 100
 
 int binarySearch( int, int, int, int, int* );
 int main() {
@@ -24,7 +24,7 @@ int main() {
     for ( int i = 0; i < N; i++ )
         printf( "%d ", vector[i] );
     
-    printf( "\nBinary Search result whit key %d is: %d", key, binarySearch( 0, N, key, N, vector ) );
+    printf( "\nBinary Search result with key %d is: %d", key, binarySearch( 0, N, key, N, vector ) );
     
     printf( "\n" );
     return 0;
@@ -36,6 +36,7 @@ int binarySearch( int l, int r, int key, int n, int *a ) {
     int size = ( r - l + 1 ) / n;
     
     if ( size == 0 || n == 1 ) {
+        int p = 0;
         #pragma omp parallel for
         for ( int i = l; i <= r; i++ ) {
             if ( a[i] == key )
