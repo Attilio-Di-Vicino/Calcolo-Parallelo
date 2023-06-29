@@ -46,21 +46,18 @@ int main() {
 
     srand( time( NULL ) );
 
-    printf( "\nEnter row of matrix N: " );
-    scanf( "%d", &N );
-
-    printf( "\nEnter column of matrix N: " );
-    scanf( "%d", &M );
-
-    printf( "\nEnter scalar alpha: " );
-    scanf( "%d", &alpha );
-
     startTime = omp_get_wtime();
 
     // 1
     #pragma omp master
     {
-        // Il Matser thread genera la matrice A ed la matrice B
+        // Il Matser thread genera la matrice A e la matrice B
+        printf( "\nEnter row of matrix N: " );
+        scanf( "%d", &N );
+        printf( "\nEnter column of matrix N: " );
+        scanf( "%d", &M );
+        printf( "\nEnter scalar alpha: " );
+        scanf( "%d", &alpha );
         allocationMatrix( &A, N, M );
         allocationMatrix( &B, N, M );
         allocationMatrix( &C, C_ROW, C_COL );
