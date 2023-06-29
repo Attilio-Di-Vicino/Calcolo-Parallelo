@@ -7,18 +7,18 @@
 int main()
 {
 	int i, N;
-	int sumtot = 0, *a, *b, *c, sum;
+	unsigned long int sumtot = 0, sum = 0;
+	int *a, *b, *c;
 	double t1;
 	double t2;
 	
 	printf( "Inserisci N: " );
 	scanf( "%d", &N );
 	
-	
 	// Allocazione dinamica
-	a = ( int * ) calloc( N, sizeof( int ) );
-	b = ( int * ) calloc( N, sizeof( int ) );
-	c = ( int * ) calloc( N, sizeof( int ) );
+	a = ( int* ) calloc( N, sizeof( int ) );
+	b = ( int* ) calloc( N, sizeof( int ) );
+	c = ( int* ) calloc( N, sizeof( int ) );
 	
 	// Inizializzazione vettore a
 	for( i = 0; i < N; i++ )
@@ -69,12 +69,9 @@ int main()
 	* Dopo aver eseguito il prodotto puntuale andiamo a somma gli N elementi del vettore risultato ottenendo così uno scalare 
 	*/
 	sum = 0;
-	#pragma omp parallel for private(i,sum) shared(sumtot) schedule(static)
-	for( i = 0; i < N; i++ )
-	{
-		sum = c[i];
-		#pragma omp atomic
-		sumtot += sum;
+	#pragma omp parallel for private(i) shared(N,c) schedule(static) reduction(+:sumtot)
+	for( i = 0; i < N; i++ ) {
+		sumtot += c[i];
 	}
 	
 	// Prendiamo il tempo di fine
@@ -86,6 +83,6 @@ int main()
 	printf( "\nTempo finale: %f", t2-t1 );
 	
 	// Stampa Prodotto Scalare
-	printf( "\nSomma Totale: %d\n", sumtot );
+	printf( "\nSomma Totale: %lu\n", sumtot );
 	return 0;
 }
