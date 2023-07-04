@@ -36,14 +36,14 @@ void oddEvenSort( int* a, int N ) {
     int sw = 1, start = 0, i = 0;
     int temp;
     while( sw || start ) {
-        sw = 0 ;
+        sw = 0;
         
         #pragma omp parallel for private( temp ) 
         for ( i = start ; i < N - 1 ; i += 2) {
-            if ( a [i] > a [ i + 1 ] ) {
-                temp = a [ i ] ;
-                a [ i ] = a [ i +1];
-                a [ i +1] = temp ;
+            if ( a[i] > a[ i + 1 ] ) {
+                temp = a[i] ;
+                a[i] = a[ i + 1 ];
+                a[ i + 1 ] = temp ;
                 sw = 1 ;
             }
         }
